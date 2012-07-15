@@ -35,6 +35,14 @@ function get_migration_files() {
 }
 
 
+/**
+ * Get the migration file from it's name
+ */
+function get_migration_file_by_name($name) {
+    return MIGRATIONS_DIR . '/' . $name . '.php';
+}
+
+
 function code_template($filename) { 
     return "<?php
 
