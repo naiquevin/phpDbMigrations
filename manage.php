@@ -29,10 +29,10 @@ function run_command($_argv) {
 
     if ($cmd === 'migrate') {
         $n = array_search('-n', $opts);
-        $name = $n != -1 ? $opts[$n+1] : null;
-        $fake = array_search('--fake', $opts) >= 0;
-        $recover = !$fake && array_search('--recover', $opts) >= 0;
-        run_migration($name, $fake, $recover);
+        $name = $n === false ? null : $opts[$n+1];
+        $fake = array_search('--fake', $opts);
+        $recover = !$fake && array_search('--recover', $opts) !== false;
+        run_migrations($name, $fake, $recover);
         return;
     }    
 }
@@ -67,7 +67,7 @@ function run_migrations($name, $fake, $recover) {
             // migrate_forwards
             migrate_backwards($name, $fake, $recover);
         } else {
-            $files = array($name . '.php');
+            $files = array(helpers\get_migration_file_by_name($name));
             migrate_forwards($files, $fake, $recover);
         }
     } else {
@@ -87,12 +87,12 @@ function migrate_forwards($files, $fake, $recover) {
  
         // check if it's already migrated, if yes, just continue
         if (history\exists($ns)) {
-            message($ns . ' already migrated..skipping');
+            helpers\printout($ns . ' -> already migrated..skipping');
             continue;
         }
 
         $func = "\\phpDbMigrations\\migrations\\$ns\\forwards";
-        message('Running '.$func);
+        helpers\printout('Running '.$func);
  
         //if fake option is passed then dont call the functions,
         //simply add that to migration table
@@ -114,19 +114,20 @@ function migrate_forwards($files, $fake, $recover) {
     }
 }
 
+
 /**
  * Function to rollback the migration to the migration that's
  * passed as the arg. This will invoke the backwards function
  * in the migration files
  */
-function migrate_backwards($name) {
+function migrate_backwards($name, $fake, $recover) {
     $later = history\get_later_than($name);
     foreach ($later as $m) {
         $ns = $m['migration'];
-        $f = $ns . '.php';
+        $f = helpers\get_migration_file_by_name($ns);
         include $f;
-        $func = "\\migrations\\$ns\\backwards";
-        message('Running '. $func);
+        $func = "\\phpDbMigrations\\migrations\\$ns\\backwards";
+        helpers\printout('Running '. $func);
         if (!$fake) {
             try {
                 $func();
@@ -140,7 +141,6 @@ function migrate_backwards($name) {
                 }
             }
         }
-
         history\delete($ns);
     }    
 }
@@ -159,6 +159,7 @@ try {
     run_command($argv);
 } 
 catch (\Exception $e) {
+    helpers\printout('Failed with ' . get_class($e) . ': ' . $e->getMessage());
     showhelp();
 }
 
