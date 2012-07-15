@@ -21,9 +21,9 @@ class PDOWrapper {
     public $obj;
 
     public function __construct() {
-        $this->obj = new \PDO(sprintf('mysql:host=%s;dbname=%s;charset=UTF8', DB_HOST, DB_NAME),
-                              DB_USER, 
-                              DB_PASS, 
+        $this->obj = new \PDO(sprintf('mysql:host=%s;dbname=%s;charset=UTF8', PDBM_HOST, PDBM_NAME),
+                              PDBM_USER, 
+                              PDBM_PASS, 
                               array(
                                   \PDO::ATTR_EMULATE_PREPARES => false, 
                                   \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
