@@ -40,7 +40,7 @@ class PDOWrapper {
             $db->beginTransaction();            
             $db->exec($sql);
             $db->commit();
-            echo "DONE\n";
+            helpers\printout('Ok');
         } catch (PDOException $e) {
             //Something went wrong rollback!
             $db->rollBack();
