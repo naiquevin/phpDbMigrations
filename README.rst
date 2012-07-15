@@ -23,8 +23,8 @@ Todo
 Original Contributors
 ---------------------
 
-`Vineet Naik`_
-`Jimit Modi`_
+* `Vineet Naik`_ 
+* `Jimit Modi`_
 
 
 .. _`Kodeplay's`: http://kodeplay.com
