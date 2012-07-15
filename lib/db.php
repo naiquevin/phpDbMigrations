@@ -7,12 +7,13 @@ use phpDbMigrations\lib\helpers;
 
 class MysqlException extends \Exception {} 
 
+
 class PDOWrapper {
     private static $_instance;
 
     public static function instance() {
         if (self::$_instance == null) {
-            self::$_instance = new PDODbWrapper();
+            self::$_instance = new PDOWrapper();
         }
         return self::$_instance;
     }
