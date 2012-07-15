@@ -94,19 +94,20 @@ function delete($migration) {
     $count = $db->exec("DELETE FROM " . HISTORY_TABLENAME . " WHERE migration = '" . $migration['migration'] . "'");
 }
  
+
 /**
  * Function to check whether the migration table exists or not
- * If table does't exists it will create it.
+ * If table does't exists it will be created.
  */
 function check_migration_table() {
     try {
         $db = PDOWrapper::instance()->obj;
-        $query = $db->query("SELECT 1 FROM " . HISTORY_TABLENAME . "");
+        $query = $db->query("SELECT 1 FROM " . HISTORY_TABLENAME);
         $check = $query->fetch();
     } catch (\Exception $e ) {
         try {
-            echo ("Table " . HISTORY_TABLENAME . " not found. " . "\n");
-            echo ("Now Creating..." . "\n");
+            helpers\printout("Table " . HISTORY_TABLENAME . " doesn't exist. " . "\n");
+            helpers\printout("Creating table now..." . "\n");
             $count = $db->exec("CREATE TABLE IF NOT EXISTS `db_migrationhistory` (
                                `id` int(11) NOT NULL AUTO_INCREMENT,
                                `migration` varchar(255) NOT NULL,
@@ -114,10 +115,10 @@ function check_migration_table() {
                                PRIMARY KEY (`id`),
                                UNIQUE KEY `migration` (`migration`)
                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
-            echo ($count  . "\n");
+            helpers\printout($count  . "\n");
         } catch (\Exception $e ) {
-            echo ($e->getMessage());
-            exit();
+            helpers\printout($e->getMessage());
+            exit;
         }
     }
 }
