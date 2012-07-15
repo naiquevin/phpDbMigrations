@@ -11,8 +11,8 @@ Philosophy
 ----------
 
 My goal is to write this tool in such a way that it can be used both
-by "installing" it in a system wide fashion as well as by dropping it
-in a specific PHP application.
+by executing it in a system wide manner as well as by dropping it in a
+specific PHP application. This part is still a WIP!
 
 
 Setup, Configuration, Usage & Examples
