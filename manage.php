@@ -11,6 +11,9 @@ require 'bootstrap.php';
 
 
 function run_command($_argv) {
+    if (!isset($_argv[1])) {
+        throw new \Exception('No command specified');
+    }
     $cmd = $_argv[1];
     $opts = array_slice($_argv, 2);
     
