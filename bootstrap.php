@@ -17,11 +17,11 @@ define('MIGRATIONS_DIR', '/home/vineet/php/migration-test/migrations');
  * If your project has a database config file then use it by requiring it
  * and setting the PDBM_* constants below using those constants. 
  *
- * If there for any reason you cannot require the file where the db config
- * is defined say for eg. that file also executes some php code then 
- * define them here again. 
+ * If for any reason you cannot require the file where the db config
+ * is defined say for eg. that file also executes some php code then
+ * define them here again.
  * 
- * In short choose the best approach depending on your project
+ * In short choose the best approach depending on your project.
  */
 
 require('/home/vineet/php/migration-test/db_config.php');
@@ -33,7 +33,10 @@ define('PDBM_NAME', DB_DATABASE);
 define('PDBM_PRE', DB_PREFIX);
 
 /**
- * Name of the migrations history table
+ * Name of the migrations history table.
+ *
+ * No need to modify this unless there is another table in your
+ * database with the same name as below. But it's highly unlikely.
  */
 define('HISTORY_TABLENAME', PDBM_PRE . 'db_migrationhistory');
 
