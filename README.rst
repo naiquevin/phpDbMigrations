@@ -32,7 +32,7 @@ your VCS. It provides a command line interface for creating new
 migration files and applying them with support for a few options that
 cover commonly observed use cases.
 
-It's working is pretty much inspired by `South`_, one of the kill `Django`_
+It's working is pretty much inspired by `South`_, one of the killer `Django`_
 apps.
 
 
