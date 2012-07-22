@@ -33,7 +33,7 @@ function run_command($_argv) {
     if ($cmd === 'migrate') {
         $n = array_search('-n', $opts);
         $name = $n === false ? null : $opts[$n+1];
-        $fake = array_search('--fake', $opts);
+        $fake = array_search('--fake', $opts) === false ? false : true; // lol! php
         $recover = !$fake && array_search('--recover', $opts) !== false;
         run_migrations($name, $fake, $recover);
         return;
