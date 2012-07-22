@@ -41,7 +41,7 @@ class PDOWrapper {
             $db->exec($sql);
             $db->commit();
             helpers\printout('Ok');
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             //Something went wrong rollback!
             $db->rollBack();
             throw new MysqlException($e->getMessage());
