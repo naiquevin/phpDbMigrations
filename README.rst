@@ -24,7 +24,7 @@ opencart and many other useful opensource projects written in php. Crude
 methods such as maintaining a `db_changes.sql` file in version control
 are not quite convenient.
 
-This tool is light weight and uses minimalistic approach for solving
+This tool is light weight and uses minimalist approach for solving
 this problem. You can use it with any php application even if it
 doesn't have any kind of ORM or Model Classes. You just need to write
 and maintain sql queries to be applied `forwards` and `backwards` in
@@ -187,12 +187,12 @@ change is recorded.
 Recovering from failures
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-From personal experience I have observed that many it happens that you
-need to clear all data in your db for which you run truncate queries
-resulting in emptying of the table in which this tool keeps a record
-of all applied migrations as well (``db_migrationhistory`` if you
-stick with the default config) In this case, run the migrate command
-with the --recover flag ::
+From personal experience, I have observed that many it happens that
+you need to clear all data in your db for which you run truncate
+queries resulting in emptying of the table in that keeps a record of
+all applied migrations (``db_migrationhistory`` if you stick
+with the default config) In such case, run the migrate command with
+the --recover flag ::
 
     $ php manage.php migrate --recover
 
