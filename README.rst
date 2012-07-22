@@ -150,11 +150,11 @@ Running backwards migrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 What if you want to undo a migration. Lets say following migrations
-are already applied to our database
+are already applied to our database ::
 
-add__table__books
-add__column__books__isbn
-add__column__books__num_reviews
+    add__table__books
+    add__column__books__isbn
+    add__column__books__num_reviews
 
 Suppose we want to undo the last migration ie ``add__column__books__num_reviews``,
 run the following command ::
