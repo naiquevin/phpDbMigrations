@@ -104,15 +104,14 @@ function migrate_forwards($files, $fake, $recover) {
                 $func();
             } catch (db\MysqlException $e) {
                 if ($recover) {
-                    helper\printout("    Mysql Error. Recovering from failure to run next migrations.");
-                    continue;
+                    helpers\printout("    Mysql Error. Recovering from failure to run next migrations.");
                 } else {
-                    helper\printout("    Mysql Error. To recover from failure pass option --recover in command.");
+                    helpers\printout("    Mysql Error. To recover from failure pass option --recover in command.");
                     exit;
                 }
             }
         }
- 
+        
         history\create($ns);
     }
 }
